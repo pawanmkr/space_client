@@ -1,12 +1,12 @@
 
-const Left = ({ space, handleFetch, setSpace, username, setUsername }) => {
+const Left = ({ space, handleFetch, setSpace, username, setUsername, handleJoin }) => {
   return (
     <div className="left d-flex justify-content-center align-items-center">
         <div className="form">
             <h3 className="form-heading">You Ready?</h3>
             <form className="d-flex flex-column">
                 <div className="form-item">
-                    <input type="text" className="form-input" placeholder="Space name" value={space} onChange={(e) => setSpace(e.target.value)}/>
+                    <input type="text" className="form-input" placeholder="Space name or Id" value={space} onChange={(e) => setSpace(e.target.value)}/>
                 </div>
                 <div className="form-item">
                     <input type="text" className="form-input" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
@@ -21,7 +21,7 @@ const Left = ({ space, handleFetch, setSpace, username, setUsername }) => {
                     or
                 </h4>
                 <div className="form-item">
-                    <button type="submit" className="form-join-btn">Join</button>
+                    <button type="submit" className="form-join-btn" onClick={handleJoin}>Join</button>
                 </div>
             </form>
         </div>
