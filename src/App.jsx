@@ -49,6 +49,9 @@ function App() {
   const handleJoin = (e) => {
     e.preventDefault()
 
+    // simon, yha ye change krna hai 
+    // you need to modify this item here...in create you were giving name and username
+    // but here i need id and username so change name with id
     let item = {
       name: space,
       username: username
