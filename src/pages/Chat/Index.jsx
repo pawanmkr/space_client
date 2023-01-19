@@ -4,7 +4,6 @@ import ChatRight from "./ChatRight"
 
 
 const Chat = ({ newSpace, activity, allSpaces }) => {
-    console.log(newSpace)
 
     return (
         <div className="chat-section d-flex justify-content-between align-items-center">

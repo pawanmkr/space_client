@@ -3,8 +3,7 @@ import Home from './pages/Home/Index'
 import Chat from './pages/Chat/Index'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
-
+import { io } from 'socket.io-client';
 
 function App() {
 
@@ -16,6 +15,32 @@ function App() {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const navigate = useNavigate()
+
+
+  async function handleSocket(spacename) {
+    // socket io
+    const nameSpace = io(`http://localhost:4000/${spacename}`, {
+      transports: ['websocket'],
+      upgrade: false,
+      rejectUnauthorized: false
+    })
+
+    nameSpace.on('connect', () => {
+      console.log(`connected in ${spacename} with socketID ${nameSpace.id}`);
+      console.log(nameSpace);
+
+      // nameSpace.emit("messageFromClient", newMessage)
+      // setNewMessage('')
+      nameSpace.emit("messageFromClient", "hello from client");
+    })
+
+    // nameSpace.on('messageFromServer', (msg) => {
+    //   setMessages(messages => [...messages, msg])
+    // })
+    nameSpace.on('messageFromServer', (msg) => {
+      console.log(msg);
+    })
+  }
   
   // create room - fetch post
   const handleFetch = (e) => {
@@ -41,6 +66,7 @@ function App() {
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
       navigate(`/spaces/${data.extractData.spaceName}`)
+      handleSocket(data.extractData.spaceName);
     })
     
   }
@@ -71,27 +97,11 @@ function App() {
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
       navigate(`/spaces/${data.extractData.spaceName}`)
+      handleSocket(data.extractData.spaceName);
     })
   }
 
-
-  // socket io
-  const nameSpace = io(`/${newSpace}`, {
-    transports: ['websocket', 'polling'],
-    upgrade: false,
-    rejectUnauthorized: false
-  })
-
-  nameSpace.on('connect', (socket) => {
-    console.log(`connected in ${nameSpace} with socketID ${socket.id}`)
-
-    socket.emit("messageFromClient", newMessage)
-    setNewMessage('')
-  })
-
-  nameSpace.on('messageFromServer', (msg) => {
-    setMessages(messages => [...messages, msg])
-  })
+  
 
 
 
