@@ -53,7 +53,7 @@ function App() {
     // you need to modify this item here...in create you were giving name and username
     // but here i need id and username so change name with id
     let item = {
-      name: space,
+      id: space,
       username: username
     }
 
