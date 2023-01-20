@@ -1,7 +1,7 @@
 import Message from "../../components/Message"
 
 
-const ChatMiddle = ({ newSpace }) => {
+const ChatMiddle = ({ newSpace, messageInput, setMessageInput, messages, handleFormSubmit }) => {
 
     return (
         <div className="chat-middle">
@@ -9,12 +9,15 @@ const ChatMiddle = ({ newSpace }) => {
                 <p className="space-title">{newSpace}</p>
             </div>
             <div className="message-section p-3">
-                <Message text="Received Text" author="Simon Paul" sender={false} />
-                <Message text="Sent Text" author="Pawan Lamar" sender={true} />
+                {/* <Message text="Received Text" author="Simon Paul" sender={false} />
+                <Message text="Sent Text" author="Pawan Lamar" sender={true} /> */}
+                {messages.map(msg => {
+                    return <Message text={msg} author="Simon" sender={true}/>
+                })}
             </div>
             <div className="input-box">
-                <form className="d-flex input-form px-3 py-2" onSubmit={(e) => e.preventDefault()}>
-                    <input type="text" className="input-message" placeholder="Type Message Here..." />
+                <form className="d-flex input-form px-3 py-2" onSubmit={handleFormSubmit}>
+                    <input type="text" className="input-message" value={messageInput} placeholder="Type Message Here..." onChange={(e) => setMessageInput(e.target.value)}/>
                     <button type="submit" className="input-submit-btn"><i className="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>

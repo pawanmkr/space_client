@@ -4,6 +4,7 @@ import Chat from './pages/Chat/Index'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { io } from 'socket.io-client';
+import { useEffect } from 'react'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   const [allSpaces, setAllSpaces] = useState([])
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
+  const [messageInput, setMessageInput] = useState('')
   const navigate = useNavigate()
 
 
@@ -31,14 +33,17 @@ function App() {
 
       // nameSpace.emit("messageFromClient", newMessage)
       // setNewMessage('')
-      nameSpace.emit("messageFromClient", "hello from client");
+      // document.getElementById('sendBtn').addEventListener('click', () => {
+      //   console.log(messageInput)
+      //   // nameSpace.emit("messageFromClient", messageInput);
+      // })
     })
 
     // nameSpace.on('messageFromServer', (msg) => {
     //   setMessages(messages => [...messages, msg])
     // })
     nameSpace.on('messageFromServer', (msg) => {
-      console.log(msg);
+      setMessages(messages => [...messages, msg])
     })
   }
   
@@ -101,8 +106,14 @@ function App() {
     })
   }
 
-  
 
+  // handle send message
+  useEffect(() => { console.log(messageInput) }, [messageInput])
+  
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    console.log(messageInput)
+  }
 
 
   
@@ -112,7 +123,7 @@ function App() {
       <div>
           <Routes>
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
-            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces}/>} />
+            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces}  messageInput={messageInput} setMessageInput={setMessageInput} messages={messages} handleFormSubmit={handleFormSubmit}/>} />
           </Routes>
       </div>
     </div>
