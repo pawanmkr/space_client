@@ -5,6 +5,9 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { io } from 'socket.io-client';
 import { useEffect } from 'react'
+import { useRef } from 'react'
+
+
 
 function App() {
 
@@ -13,38 +16,36 @@ function App() {
   const [username, setUsername] = useState('')
   const [activity, setActivity] = useState([])
   const [allSpaces, setAllSpaces] = useState([])
-  const [messages, setMessages] = useState([])
-  const [newMessage, setNewMessage] = useState('')
-  const [messageInput, setMessageInput] = useState('')
+
+  const [socket, setSocket] = useState()
   const navigate = useNavigate()
+  const sendBtn = useRef(null)
 
 
-  async function handleSocket(spacename) {
-    // socket io
-    const nameSpace = io(`http://localhost:4000/${spacename}`, {
-      transports: ['websocket'],
-      upgrade: false,
-      rejectUnauthorized: false
-    })
-
-    nameSpace.on('connect', () => {
-      console.log(`connected in ${spacename} with socketID ${nameSpace.id}`);
-
+  // async function handleSocket(spacename) {
+  //   // socket io
       // nameSpace.emit("messageFromClient", newMessage)
       // setNewMessage('')
       // document.getElementById('sendBtn').addEventListener('click', () => {
       //   console.log(messageInput)
       //   nameSpace.emit("messageFromClient", messageInput);
       // })
-    })
 
-    // nameSpace.on('messageFromServer', (msg) => {
-    //   setMessages(messages => [...messages, msg])
-    // })
-    nameSpace.on('messageFromServer', (msg) => {
-      setMessages(messages => [...messages, msg])
-    })
-  }
+  // //     // nameSpace.emit("messageFromClient", newMessage)
+  // //     // setNewMessage('')
+  // //     // document.getElementById('sendBtn').addEventListener('click', () => {
+  // //     //   console.log(messageInput)
+  // //     //   // nameSpace.emit("messageFromClient", messageInput);
+  // //     // })
+  // //   })
+
+  // //   // nameSpace.on('messageFromServer', (msg) => {
+  // //   //   setMessages(messages => [...messages, msg])
+  // //   // })
+  // //   nameSpace.on('messageFromServer', (msg) => {
+  // //     setMessages(messages => [...messages, msg])
+  // //   })
+  // }
   
   // create room - fetch post
   const handleFetch = (e) => {
@@ -70,7 +71,6 @@ function App() {
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
       navigate(`/spaces/${data.extractData.spaceName}`)
-      handleSocket(data.extractData.spaceName);
     })
     
   }
@@ -102,13 +102,9 @@ function App() {
     })
   }
 
-
-  // handle send message
-  useEffect(() => { console.log(messageInput) }, [messageInput])
   
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log(messageInput)
   }
 
 
@@ -119,7 +115,7 @@ function App() {
       <div>
           <Routes>
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
-            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces}  messageInput={messageInput} setMessageInput={setMessageInput} messages={messages} handleFormSubmit={handleFormSubmit}/>} />
+            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  />} />
           </Routes>
       </div>
     </div>
