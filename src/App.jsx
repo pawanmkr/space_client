@@ -29,13 +29,12 @@ function App() {
 
     nameSpace.on('connect', () => {
       console.log(`connected in ${spacename} with socketID ${nameSpace.id}`);
-      console.log(nameSpace);
 
       // nameSpace.emit("messageFromClient", newMessage)
       // setNewMessage('')
       // document.getElementById('sendBtn').addEventListener('click', () => {
       //   console.log(messageInput)
-      //   // nameSpace.emit("messageFromClient", messageInput);
+      //   nameSpace.emit("messageFromClient", messageInput);
       // })
     })
 
@@ -80,9 +79,6 @@ function App() {
   const handleJoin = (e) => {
     e.preventDefault()
 
-    // simon, yha ye change krna hai 
-    // you need to modify this item here...in create you were giving name and username
-    // but here i need id and username so change name with id
     let item = {
       id: space,
       username: username

@@ -1,6 +1,7 @@
 import ChatLeft from "./ChatLeft"
 import ChatMiddle from "./ChatMiddle"
 import ChatRight from "./ChatRight"
+import handleFormSubmit from "../../App"
 
 
 const Chat = ({ newSpace, activity, allSpaces, messageInput, setMessageInput, handleSendMessage, messages }) => {

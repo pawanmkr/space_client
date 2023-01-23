@@ -1,6 +1,8 @@
 import Room from "../../components/Room"
 import RadioHead from "../../assets/profile.png"
 
+const random = Math.floor(Math.random() * 100000);
+
 const ChatRight = ({ allSpaces }) => {
   return (
     <div className="chat-right">
@@ -8,7 +10,7 @@ const ChatRight = ({ allSpaces }) => {
         <div className="profile-section p-3 pb-1">
           <div className="profile-section__content d-flex justify-content-center align-items-center flex-column mb-2">
             <div className="profile-container mb-3">
-              <img src={RadioHead} alt="Profile-Image" className="profile-image" />
+              <img src={`https://robohash.org/${random}`} alt="Profile-Image" className="profile-image" />
             </div>
             <h4 className="profile-name">Simon Paul</h4>
           </div>
