@@ -4,6 +4,8 @@ import RadioHead from "../../assets/profile.png"
 const random = Math.floor(Math.random() * 100000);
 
 const ChatRight = ({ allSpaces }) => {
+
+  console.log(allSpaces)
   return (
     <div className="chat-right">
       <div className="chat-right__content">
