@@ -3,9 +3,10 @@ import { io } from 'socket.io-client';
 import { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid'
 
-const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
+const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username }) => {
 
     const [newMessage, setNewMessage] = useState('')
+    const [newAuthor, setNewAuthor] = useState('')
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
     const [socketNameSpace, setSocketNameSpace] = useState(null)
@@ -31,22 +32,24 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
 
     const handleSendMessage = (e) => {
         e.preventDefault()
-        console.log(messageInput)
-        socketNameSpace.emit("messageFromClient", messageInput);
+        const itemMessage = {
+            message: messageInput,
+            username: username
+        }
+        console.log(itemMessage)
+        socketNameSpace.emit("messageFromClient", itemMessage);
         socketNameSpace.on('messageFromServer', (msg) => {
-            setNewMessage(msg)
+            setNewMessage(msg.message)
+            setNewAuthor(msg.username)
         })
         setMessageInput('')
     }
 
     useEffect(() => {
         if(newMessage){
-            setMessages((messages) => [...messages, newMessage])
+            setMessages((messages) => [...messages, {message: newMessage, username: newAuthor}])
         }
     }, [newMessage])
-
-
-
 
 
     return (
@@ -56,7 +59,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
             </div>
             <div className="message-section p-3">
                 {messages.map(msg => {
-                    return <Message text={msg} author="Simon" sender={true} key={uuid()}/>
+                    return <Message text={msg.message} author={msg.username} sender={username === msg.username ? true : false} key={uuid()}/>
                 })}
             </div>
             <div className="input-box">

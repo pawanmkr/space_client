@@ -15,36 +15,10 @@ function App() {
   const [username, setUsername] = useState('')
   const [activity, setActivity] = useState([])
   const [allSpaces, setAllSpaces] = useState([])
-
-  const [socket, setSocket] = useState()
+  
   const navigate = useNavigate()
   const sendBtn = useRef(null)
 
-
-  // async function handleSocket(spacename) {
-  //   // socket io
-      // nameSpace.emit("messageFromClient", newMessage)
-      // setNewMessage('')
-      // document.getElementById('sendBtn').addEventListener('click', () => {
-      //   console.log(messageInput)
-      //   nameSpace.emit("messageFromClient", messageInput);
-      // })
-
-  // //     // nameSpace.emit("messageFromClient", newMessage)
-  // //     // setNewMessage('')
-  // //     // document.getElementById('sendBtn').addEventListener('click', () => {
-  // //     //   console.log(messageInput)
-  // //     //   // nameSpace.emit("messageFromClient", messageInput);
-  // //     // })
-  // //   })
-
-  // //   // nameSpace.on('messageFromServer', (msg) => {
-  // //   //   setMessages(messages => [...messages, msg])
-  // //   // })
-  // //   nameSpace.on('messageFromServer', (msg) => {
-  // //     setMessages(messages => [...messages, msg])
-  // //   })
-  // }
   
   // create room - fetch post
   const handleFetch = (e) => {
@@ -114,7 +88,7 @@ function App() {
       <div>
           <Routes>
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
-            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  />} />
+            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  username={username}/>} />
           </Routes>
       </div>
     </div>
