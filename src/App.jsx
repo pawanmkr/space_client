@@ -3,7 +3,6 @@ import Home from './pages/Home/Index'
 import Chat from './pages/Chat/Index'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { io } from 'socket.io-client';
 import { useEffect } from 'react'
 import { useRef } from 'react'
 

@@ -2,7 +2,6 @@ import Message from "../../components/Message"
 import { io } from 'socket.io-client';
 import { useEffect, useState } from "react";
 
-
 const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
 
     const [newMessage, setNewMessage] = useState('')
@@ -17,7 +16,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
 
     useEffect(() => {
         nameSpace.on('connect', () => {
-            // console.log(`connected in ${spacename} with socketID ${nameSpace.id}`);
+            console.log(`connected in ${nameSpace.name} with socketID ${nameSpace.id}`);
             console.log(nameSpace);
         })
     }, [])
@@ -50,8 +49,6 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
                 <p className="space-title">{newSpace}</p>
             </div>
             <div className="message-section p-3">
-                {/* <Message text="Received Text" author="Simon Paul" sender={false} />
-                <Message text="Sent Text" author="Pawan Lamar" sender={true} /> */}
                 {messages.map(msg => {
                     return <Message text={msg} author="Simon" sender={true} />
                 })}
