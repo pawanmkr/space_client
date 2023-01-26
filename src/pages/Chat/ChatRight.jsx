@@ -1,5 +1,5 @@
 import Room from "../../components/Room"
-import RadioHead from "../../assets/profile.png"
+import { v4 as uuid } from 'uuid'
 
 const random = Math.floor(Math.random() * 100000);
 
@@ -27,7 +27,7 @@ const ChatRight = ({ allSpaces }) => {
             <Room room="blue pegasus: reincarnation"/>
             <Room room="SM2 these are the breaks."/> */}
             {allSpaces && allSpaces.map(space => {
-              return <Room room={space.name}/>
+              return <Room room={space.name} key={uuid()}/>
             })}
           </div>
 

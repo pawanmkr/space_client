@@ -1,32 +1,39 @@
 import Message from "../../components/Message"
 import { io } from 'socket.io-client';
 import { useEffect, useState } from "react";
+import { v4 as uuid } from 'uuid'
 
 const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
 
     const [newMessage, setNewMessage] = useState('')
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
+    const [socketNameSpace, setSocketNameSpace] = useState(null)
 
-    const nameSpace = io(`http://localhost:4000/${newSpace}`, {
-        transports: ['websocket'],
-        upgrade: false,
-        rejectUnauthorized: false
-    })
 
     useEffect(() => {
+
+        const nameSpace = io(`http://localhost:4000/${newSpace}`, {
+            transports: ['websocket'],
+            upgrade: false,
+            rejectUnauthorized: false
+        })
+
         nameSpace.on('connect', () => {
             console.log(`connected in ${nameSpace.name} with socketID ${nameSpace.id}`);
             console.log(nameSpace);
         })
+
+        setSocketNameSpace(nameSpace)
+
     }, [])
 
 
     const handleSendMessage = (e) => {
         e.preventDefault()
         console.log(messageInput)
-        nameSpace.emit("messageFromClient", messageInput);
-        nameSpace.on('messageFromServer', (msg) => {
+        socketNameSpace.emit("messageFromClient", messageInput);
+        socketNameSpace.on('messageFromServer', (msg) => {
             setNewMessage(msg)
         })
         setMessageInput('')
@@ -38,7 +45,6 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
         }
     }, [newMessage])
 
-    console.log(messageInput)
 
 
 
@@ -50,7 +56,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
             </div>
             <div className="message-section p-3">
                 {messages.map(msg => {
-                    return <Message text={msg} author="Simon" sender={true} />
+                    return <Message text={msg} author="Simon" sender={true} key={uuid()}/>
                 })}
             </div>
             <div className="input-box">

@@ -279,9 +279,11 @@ form {
 }
 .received {
   text-align: left;
+  margin-bottom: 10px;
 }
 .sent {
   text-align: right;
+  margin-bottom: 10px;
 }
 .sender {
   font-size: 10px;

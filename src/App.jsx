@@ -80,7 +80,7 @@ function App() {
 
     let item = {
       id: space,
-      username: username
+      username: username,
     }
 
     fetch(`http://localhost:4000/namespace/join/${space}`, {

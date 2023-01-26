@@ -1,4 +1,5 @@
 import Members from "../../components/Members"
+import { v4 as uuid } from 'uuid'
 
 
 const ChatLeft = ({ activity }) => {
@@ -40,7 +41,7 @@ const ChatLeft = ({ activity }) => {
                         <Members member="Lakshay" />
                         <Members member="SRD" /> */}
                         {activity && activity.map(act => {
-                            return <Members member={act.username} />
+                            return <Members member={act.username} key={uuid()}/>
                         })}
                     </div>
                 </div>
