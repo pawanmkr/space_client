@@ -3,7 +3,7 @@ const Left = ({ space, handleFetch, setSpace, username, setUsername, handleJoin 
   return (
     <div className="left d-flex justify-content-center align-items-center">
         <div className="form">
-            <h3 className="form-heading">You Ready?</h3>
+            <h6 className="form-heading">Create your Space <br /> Super Quick!</h6>
             <form className="d-flex flex-column">
                 <div className="form-item">
                     <input type="text" className="form-input" placeholder="Space name or Id" value={space} onChange={(e) => setSpace(e.target.value)}/>

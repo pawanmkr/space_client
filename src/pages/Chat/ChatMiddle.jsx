@@ -13,7 +13,6 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username }) => {
 
 
     useEffect(() => {
-
         const nameSpace = io(`http://localhost:4000/${newSpace}`, {
             transports: ['websocket'],
             upgrade: false,
@@ -50,7 +49,6 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username }) => {
             setMessages((messages) => [...messages, {message: newMessage, username: newAuthor}])
         }
     }, [newMessage])
-
 
     return (
         <div className="chat-middle">

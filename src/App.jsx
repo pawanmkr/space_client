@@ -6,8 +6,6 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 
-
-
 function App() {
 
   const [space, setSpace] = useState('')
@@ -18,11 +16,9 @@ function App() {
   
   const navigate = useNavigate()
   const sendBtn = useRef(null)
-
   
   // create room - fetch post
   const handleFetch = (e) => {
-
     e.preventDefault()
 
     let item = {
@@ -45,7 +41,6 @@ function App() {
       setAllSpaces(data.allSpace)
       navigate(`/spaces/${data.extractData.spaceName}`)
     })
-    
   }
 
   // join room - fetch get
@@ -74,14 +69,10 @@ function App() {
       handleSocket(data.extractData.spaceName);
     })
   }
-
   
   const handleFormSubmit = (e) => {
     e.preventDefault()
   }
-
-
-  
 
   return (
     <div className="app">
@@ -89,6 +80,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
             <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  username={username}/>} />
+            // new route here to which looks like "/spaces/join/:spaces_id"
           </Routes>
       </div>
     </div>
