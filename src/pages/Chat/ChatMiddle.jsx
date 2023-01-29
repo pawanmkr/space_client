@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid'
 
-const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username }) => {
+const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) => {
 
     const [newMessage, setNewMessage] = useState('')
     const [newAuthor, setNewAuthor] = useState('')
@@ -33,7 +33,8 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username }) => {
         e.preventDefault()
         const itemMessage = {
             message: messageInput,
-            username: username
+            username: username,
+            spaceId: spaceId
         }
         console.log(itemMessage)
         socketNameSpace.emit("messageFromClient", itemMessage);
