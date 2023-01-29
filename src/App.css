@@ -377,3 +377,15 @@ form {
   color: #333;
   text-align: center;
 }
+
+.share-btn {
+  display: inline-block;
+  cursor: pointer;
+}
+.join-page {
+  width: 100%;
+  height: 100vh;
+}
+.profile-name {
+  cursor: pointer;
+}

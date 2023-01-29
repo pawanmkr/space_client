@@ -53,8 +53,9 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) 
 
     return (
         <div className="chat-middle">
-            <div className="chatroom-name p-3">
+            <div className="chatroom-name p-3 d-flex justify-content-between align-items-center">
                 <p className="space-title">{newSpace}</p>
+                <p className="share-btn"><i class="fa-solid fa-plus"></i></p>
             </div>
             <div className="message-section p-3">
                 {messages.map(msg => {

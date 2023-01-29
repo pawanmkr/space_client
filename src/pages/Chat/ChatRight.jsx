@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 
 const random = Math.floor(Math.random() * 100000);
 
-const ChatRight = ({ allSpaces }) => {
+const ChatRight = ({ allSpaces, username }) => {
 
   console.log(allSpaces)
   return (
@@ -14,7 +14,7 @@ const ChatRight = ({ allSpaces }) => {
             <div className="profile-container mb-3">
               <img src={`https://robohash.org/${random}`} alt="Profile-Image" className="profile-image" />
             </div>
-            <h4 className="profile-name">Simon Paul</h4>
+            <h4 className="profile-name">@{username}</h4>
           </div>
         </div>
 

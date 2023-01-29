@@ -1,10 +1,10 @@
 import './App.css'
 import Home from './pages/Home/Index'
 import Chat from './pages/Chat/Index'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { useEffect } from 'react'
 import { useRef } from 'react'
+import Join from './components/Join'
 
 function App() {
 
@@ -17,6 +17,8 @@ function App() {
   
   const navigate = useNavigate()
   const sendBtn = useRef(null)
+
+
   
   // create room - fetch post
   const handleFetch = (e) => {
@@ -83,6 +85,8 @@ function App() {
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
             <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  username={username} spaceId={spaceId}/>} />
             {/* // new route here to which looks like "/spaces/join/:spaces_id" */}
+
+            <Route path='/join/:joinSpaceId' element={<Join setNewSpace={setNewSpace} setActivity={setActivity} setAllSpaces={setAllSpaces} setSpaceId={setSpaceId} setUsername={setUsername}/>}/>
           </Routes>
       </div>
     </div>

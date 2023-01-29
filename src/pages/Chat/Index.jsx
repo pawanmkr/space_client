@@ -10,7 +10,7 @@ const Chat = ({ newSpace, activity, allSpaces, messageInput, setMessageInput, ha
         <div className="chat-section d-flex justify-content-between align-items-center">
             <ChatLeft activity={activity}/>
             <ChatMiddle newSpace={newSpace} handleSendMessage={handleSendMessage}  handleFormSubmit={handleFormSubmit} sendBtn={sendBtn} username={username} spaceId={spaceId}/>
-            <ChatRight allSpaces={allSpaces}/>
+            <ChatRight allSpaces={allSpaces} username={username}/>
         </div>
     )
 }
