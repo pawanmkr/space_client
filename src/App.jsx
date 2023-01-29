@@ -69,6 +69,7 @@ function App() {
       setNewSpace(data.extractData.spaceName)
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
+      setSpaceId(data.extractData.shareableSpaceId)
       navigate(`/spaces/${data.extractData.spaceName}`)
       handleSocket(data.extractData.spaceName);
     })
