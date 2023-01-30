@@ -1,13 +1,10 @@
 import './App.css'
 import Home from './pages/Home/Index'
 import Chat from './pages/Chat/Index'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { io } from 'socket.io-client';
-import { useEffect } from 'react'
 import { useRef } from 'react'
-
-
+import Join from './components/Join'
 
 function App() {
 
@@ -16,40 +13,15 @@ function App() {
   const [username, setUsername] = useState('')
   const [activity, setActivity] = useState([])
   const [allSpaces, setAllSpaces] = useState([])
-
-  const [socket, setSocket] = useState()
+  const [spaceId, setSpaceId] = useState('')
+  
   const navigate = useNavigate()
   const sendBtn = useRef(null)
 
 
-  // async function handleSocket(spacename) {
-  //   // socket io
-      // nameSpace.emit("messageFromClient", newMessage)
-      // setNewMessage('')
-      // document.getElementById('sendBtn').addEventListener('click', () => {
-      //   console.log(messageInput)
-      //   nameSpace.emit("messageFromClient", messageInput);
-      // })
-
-  // //     // nameSpace.emit("messageFromClient", newMessage)
-  // //     // setNewMessage('')
-  // //     // document.getElementById('sendBtn').addEventListener('click', () => {
-  // //     //   console.log(messageInput)
-  // //     //   // nameSpace.emit("messageFromClient", messageInput);
-  // //     // })
-  // //   })
-
-  // //   // nameSpace.on('messageFromServer', (msg) => {
-  // //   //   setMessages(messages => [...messages, msg])
-  // //   // })
-  // //   nameSpace.on('messageFromServer', (msg) => {
-  // //     setMessages(messages => [...messages, msg])
-  // //   })
-  // }
   
   // create room - fetch post
   const handleFetch = (e) => {
-
     e.preventDefault()
 
     let item = {
@@ -70,9 +42,9 @@ function App() {
       setNewSpace(data.extractData.spaceName)
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
+      setSpaceId(data.extractData.shareableSpaceId)
       navigate(`/spaces/${data.extractData.spaceName}`)
     })
-    
   }
 
   // join room - fetch get
@@ -81,7 +53,7 @@ function App() {
 
     let item = {
       id: space,
-      username: username
+      username: username,
     }
 
     fetch(`http://localhost:4000/namespace/join/${space}`, {
@@ -97,25 +69,25 @@ function App() {
       setNewSpace(data.extractData.spaceName)
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
+      setSpaceId(data.extractData.shareableSpaceId)
       navigate(`/spaces/${data.extractData.spaceName}`)
       handleSocket(data.extractData.spaceName);
     })
   }
-
   
   const handleFormSubmit = (e) => {
     e.preventDefault()
   }
-
-
-  
 
   return (
     <div className="app">
       <div>
           <Routes>
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
-            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  />} />
+            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  username={username} spaceId={spaceId}/>} />
+            {/* // new route here to which looks like "/spaces/join/:spaces_id" */}
+
+            <Route path='/join/:joinSpaceId' element={<Join setNewSpace={setNewSpace} setActivity={setActivity} setAllSpaces={setAllSpaces} setSpaceId={setSpaceId} setUsername={setUsername}/>}/>
           </Routes>
       </div>
     </div>

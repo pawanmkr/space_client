@@ -1,59 +1,65 @@
 import Message from "../../components/Message"
 import { io } from 'socket.io-client';
 import { useEffect, useState } from "react";
+import { v4 as uuid } from 'uuid'
 
-
-const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn }) => {
+const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) => {
 
     const [newMessage, setNewMessage] = useState('')
+    const [newAuthor, setNewAuthor] = useState('')
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
+    const [socketNameSpace, setSocketNameSpace] = useState(null)
 
-    const nameSpace = io(`http://localhost:4000/${newSpace}`, {
-        transports: ['websocket'],
-        upgrade: false,
-        rejectUnauthorized: false
-    })
 
     useEffect(() => {
+        const nameSpace = io(`http://localhost:4000/${newSpace}`, {
+            transports: ['websocket'],
+            upgrade: false,
+            rejectUnauthorized: false
+        })
+
         nameSpace.on('connect', () => {
-            // console.log(`connected in ${spacename} with socketID ${nameSpace.id}`);
+            console.log(`connected in ${nameSpace.name} with socketID ${nameSpace.id}`);
             console.log(nameSpace);
         })
+
+        setSocketNameSpace(nameSpace)
+
     }, [])
 
 
     const handleSendMessage = (e) => {
         e.preventDefault()
-        console.log(messageInput)
-        nameSpace.emit("messageFromClient", messageInput);
-        nameSpace.on('messageFromServer', (msg) => {
-            setNewMessage(msg)
+        const itemMessage = {
+            message: messageInput,
+            username: username,
+            spaceId: spaceId
+        }
+        console.log(itemMessage)
+        socketNameSpace.emit("messageFromClient", itemMessage);
+        socketNameSpace.on('messageFromServer', (msg) => {
+            setNewMessage(msg.message)
+            setNewAuthor(msg.username)
         })
         setMessageInput('')
     }
 
     useEffect(() => {
         if(newMessage){
-            setMessages((messages) => [...messages, newMessage])
+            setMessages((messages) => [...messages, {message: newMessage, username: newAuthor}])
         }
     }, [newMessage])
 
-    console.log(messageInput)
-
-
-
-
     return (
         <div className="chat-middle">
-            <div className="chatroom-name p-3">
+            <div className="chatroom-name p-3 d-flex justify-content-between align-items-center">
                 <p className="space-title">{newSpace}</p>
+                <p className="share-btn"><i class="fa-solid fa-plus"></i></p>
             </div>
             <div className="message-section p-3">
-                {/* <Message text="Received Text" author="Simon Paul" sender={false} />
-                <Message text="Sent Text" author="Pawan Lamar" sender={true} /> */}
                 {messages.map(msg => {
-                    return <Message text={msg} author="Simon" sender={true} />
+                    return <Message text={msg.message} author={msg.username} sender={username === msg.username ? true : false} key={uuid()}/>
                 })}
             </div>
             <div className="input-box">
