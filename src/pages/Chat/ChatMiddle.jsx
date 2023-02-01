@@ -3,6 +3,8 @@ import { io } from 'socket.io-client';
 import { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid'
 
+import notificationSound from '../../assets/whatsapppc.mp3';
+
 const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) => {
 
     const [newMessage, setNewMessage] = useState('')
@@ -10,6 +12,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) 
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
     const [socketNameSpace, setSocketNameSpace] = useState(null)
+    const [notification, setNotification] = useState(new Audio(notificationSound));
 
 
     useEffect(() => {
@@ -41,6 +44,9 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) 
         socketNameSpace.on('messageFromServer', (msg) => {
             setNewMessage(msg.message)
             setNewAuthor(msg.username)
+            if (msg.username !== username) { // only play the notification sound if the message is not from the current user
+                notification.play(); // play the notification sound
+            }
         })
         setMessageInput('')
     }
