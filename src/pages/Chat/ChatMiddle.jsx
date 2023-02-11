@@ -14,7 +14,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
     const [messageInput, setMessageInput] = useState('')
     const [socketNameSpace, setSocketNameSpace] = useState(null)
     const [attachment, setAttachment] = useState({ file: null, name: '', type: '', size: '' })
-    const [notification, setNotification] = useState(new Audio(notificationSound));
+    const [notification] = useState(new Audio(notificationSound));
     const [checkAt, setCheckAt] = useState(false)
     const endMessage = useRef(null)
 
