@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid'
 import notificationSound from '../../assets/whatsapppc.mp3';
 import Attachment from "../../components/Attachment";
 
-const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) => {
+const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, chats }) => {
 
     const [newMessage, setNewMessage] = useState('')
     const [newAuthor, setNewAuthor] = useState('')
@@ -34,6 +34,10 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId }) 
         setSocketNameSpace(nameSpace)
 
     }, [])
+
+    useEffect(() => {
+        console.log(chats)
+    })
 
 
     const handleSendMessage = (e) => {
