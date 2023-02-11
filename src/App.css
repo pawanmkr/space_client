@@ -34,6 +34,7 @@
   width: 50%;
   height: 100%;
 }
+
 .right {
   width: 50%;
   height: 100%;
@@ -58,7 +59,8 @@ form {
   width: 100%;
 }
 
-.form-item input, button{
+.form-item input,
+button {
   padding: 10px;
   width: 100%;
 }
@@ -68,7 +70,7 @@ form {
   margin-bottom: 25px;
 }
 
-.form-input{
+.form-input {
   border: none;
   background-color: #f1f1f1;
   border-radius: 6px;
@@ -79,10 +81,11 @@ form {
 
 .form-input:last-child {
   margin-bottom: 20px;
-  
+
 }
 
-.form-submit-btn, .form-join-btn {
+.form-submit-btn,
+.form-join-btn {
   border: none;
   background-color: #e86b59;
   color: #e1e1e1;
@@ -132,6 +135,7 @@ form {
   align-items: center;
   justify-content: center;
 }
+
 .rocket-img {
   height: 70%;
   opacity: .7;
@@ -207,20 +211,24 @@ form {
   border-radius: 4px;
   display: none;
 }
+
 .switch {
   width: 50%;
 
   background-color: #47475b;
   display: none;
 }
+
 .switch p {
   cursor: pointer;
   border: 4px;
   display: none;
 }
+
 .switch p:hover {
   background-color: #f6f6f6;
 }
+
 .active-switch {
   background-color: #f6f6f6;
   display: none;
@@ -271,19 +279,23 @@ form {
   position: relative;
   background-color: #ececec;
   border-radius: .8em;
+  overflow-y: auto;
 }
 
 .message-section__content {
   height: 100%;
 }
+
 .received {
   text-align: left;
   margin-bottom: 10px;
 }
+
 .sent {
   text-align: right;
   margin-bottom: 10px;
 }
+
 .sender {
   font-size: 10px;
   margin-bottom: 10px;
@@ -301,6 +313,7 @@ form {
 .received__content {
   background-color: #fff;
 }
+
 .sent__content {
   background-color: #ececec;
 }
@@ -326,6 +339,7 @@ form {
   border: none;
   background-color: transparent;
 }
+
 .input-submit-btn i {
   font-size: 22px;
 }
@@ -353,8 +367,9 @@ form {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-/*   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
- */}
+  /*   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+ */
+}
 
 .profile-name {
   font-weight: bolder;
@@ -382,10 +397,74 @@ form {
   display: inline-block;
   cursor: pointer;
 }
+
 .join-page {
   width: 100%;
   height: 100vh;
 }
+
 .profile-name {
   cursor: pointer;
+}
+
+.attachment-btn {
+  font-size: 22px;
+  color: #5e5e5e;
+  cursor: pointer;
+}
+.attachment-wrapper {
+  position: relative;
+}
+.attachment-container {
+  display: none;
+  position: absolute;
+  bottom: 54px;
+  right: 0;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  padding: 8px;
+  /* background-color: #333; */
+  z-index: 100;
+  transition: all 0.3s ease-in;
+}
+
+.attachment-block {
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.attachment-block i {
+  font-size: 22px;
+  color: #fff;
+}
+
+.show-attachment {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+.label-attachment {
+  cursor: pointer;
+}
+
+.message-section::-webkit-scrollbar {
+  display: none;
+}
+
+/* attachment file show */
+
+.attachment_file_show {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: #ccc;
+  border-radius: .8em;
 }

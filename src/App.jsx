@@ -14,6 +14,7 @@ function App() {
   const [activity, setActivity] = useState([])
   const [allSpaces, setAllSpaces] = useState([])
   const [spaceId, setSpaceId] = useState('')
+  const [chats, setChats] = useState([])
   
   const navigate = useNavigate()
   const sendBtn = useRef(null)
@@ -38,7 +39,6 @@ function App() {
     }).then(res => {
       return res.json()
     }).then(data => {
-      console.log(data)
       setNewSpace(data.extractData.spaceName)
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
@@ -65,13 +65,13 @@ function App() {
     }).then(res => {
       return res.json()
     }).then(data => {
-      console.log(data)
       setNewSpace(data.extractData.spaceName)
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
       setSpaceId(data.extractData.shareableSpaceId)
       navigate(`/spaces/${data.extractData.spaceName}`)
-      handleSocket(data.extractData.spaceName);
+      setChats(data.extractData.chats)
+      // handleSocket(data.extractData.spaceName);
     })
   }
   
@@ -84,7 +84,7 @@ function App() {
       <div>
           <Routes>
             <Route path='/' element={<Home space={space} setSpace={setSpace} username={username} setUsername={setUsername} handleFetch={handleFetch} handleJoin={handleJoin} />} />
-            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  username={username} spaceId={spaceId}/>} />
+            <Route path='/spaces/:spaces' element={<Chat newSpace={newSpace} activity={activity} allSpaces={allSpaces} handleFormSubmit={handleFormSubmit} sendBtn={sendBtn}  username={username} spaceId={spaceId} chats={chats}/>} />
             {/* // new route here to which looks like "/spaces/join/:spaces_id" */}
 
             <Route path='/join/:joinSpaceId' element={<Join setNewSpace={setNewSpace} setActivity={setActivity} setAllSpaces={setAllSpaces} setSpaceId={setSpaceId} setUsername={setUsername}/>}/>
