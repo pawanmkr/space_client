@@ -455,3 +455,16 @@ button {
 .message-section::-webkit-scrollbar {
   display: none;
 }
+
+/* attachment file show */
+
+.attachment_file_show {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: #ccc;
+  border-radius: .8em;
+}

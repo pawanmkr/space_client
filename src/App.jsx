@@ -43,7 +43,6 @@ function App() {
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
       setSpaceId(data.extractData.shareableSpaceId)
-      setChats(data.extractData.chats)
       navigate(`/spaces/${data.extractData.spaceName}`)
     })
   }
@@ -66,12 +65,12 @@ function App() {
     }).then(res => {
       return res.json()
     }).then(data => {
-      console.log(data)
       setNewSpace(data.extractData.spaceName)
       setActivity(data.activity)
       setAllSpaces(data.allSpace)
       setSpaceId(data.extractData.shareableSpaceId)
       navigate(`/spaces/${data.extractData.spaceName}`)
+      setChats(data.extractData.chats)
       // handleSocket(data.extractData.spaceName);
     })
   }
