@@ -20,7 +20,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
 
 
     useEffect(() => {
-        const nameSpace = io(`http://localhost:4000/${newSpace}`, {
+        const nameSpace = io(`https://spaces-api.onrender.com/${newSpace}`, {
             transports: ['websocket'],
             upgrade: false,
             rejectUnauthorized: false
