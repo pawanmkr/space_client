@@ -62,11 +62,13 @@ form {
 .form-item input,
 button {
   padding: 10px;
+  font-weight: bolder;
   width: 100%;
 }
 
 .form-heading {
   color: rgba(51, 51, 51, 0.817);
+  font-weight: bolder;
   margin-bottom: 25px;
 }
 
@@ -88,8 +90,9 @@ button {
 .form-join-btn {
   border: none;
   background-color: #e86b59;
-  color: #e1e1e1;
+  color: white;
   border-radius: 6px;
+  font-weight: bolder;
 }
 
 .form-join-btn {

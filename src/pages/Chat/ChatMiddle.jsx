@@ -31,6 +31,11 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
             console.log(nameSpace);
         })
 
+        // simon, yha pe user update krde when a new user joins bas yhi likha hai maine line 44-50 tak
+        nameSpace.on('newUserAdded', (username) => {
+            console.log(username)
+        })
+
         setSocketNameSpace(nameSpace)
 
     }, [])
@@ -39,8 +44,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
         if (chats.length !== 0) {
             setMessages(chats)
         }
-    }, [])
-
+    }, [])    
 
     const handleSendMessage = (e) => {
         e.preventDefault()
@@ -59,6 +63,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
             }
 
         })
+        socketNameSpace.on
         setMessageInput('')
     }
 

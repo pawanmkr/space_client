@@ -56,7 +56,7 @@ function App() {
       username: username,
     }
 
-    // switch back to localhost when in development mode
+    // switch back to localhost when in development 
     fetch(`https://spaces-api.onrender.com/namespace/join/${space}`, {
       method: 'POST',
       headers: {
