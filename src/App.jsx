@@ -30,7 +30,7 @@ function App() {
       username: username
     }
 
-    fetch(`https://spaces-api.onrender.com/namespace/create/${space}`, {
+    fetch(`http://localhost:4000/namespace/create/${space}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -56,8 +56,8 @@ function App() {
       username: username,
     }
 
-    // switch back to localhost when in development mode
-    fetch(`https://spaces-api.onrender.com/namespace/join/${space}`, {
+    // switch back to localhost when in development 
+    fetch(`http://localhost:4000/namespace/join/${space}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
