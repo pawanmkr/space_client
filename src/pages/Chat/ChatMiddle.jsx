@@ -13,14 +13,14 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
     const [messages, setMessages] = useState([])
     const [messageInput, setMessageInput] = useState('')
     const [socketNameSpace, setSocketNameSpace] = useState(null)
-    const [attachment, setAttachment] = useState([])
-    const [notification, setNotification] = useState(new Audio(notificationSound));
+    const [attachment, setAttachment] = useState({ file: null, name: '', type: '', size: '' })
+    const [notification] = useState(new Audio(notificationSound));
     const [checkAt, setCheckAt] = useState(false)
     const endMessage = useRef(null)
 
 
     useEffect(() => {
-        const nameSpace = io(`http://localhost:4000/${newSpace}`, {
+        const nameSpace = io(`https://spaces-api.onrender.com/${newSpace}`, {
             transports: ['websocket'],
             upgrade: false,
             rejectUnauthorized: false
@@ -31,6 +31,11 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
             console.log(nameSpace);
         })
 
+        // simon, yha pe user update krde when a new user joins bas yhi likha hai maine line 44-50 tak
+        nameSpace.on('newUserAdded', (username) => {
+            console.log(username)
+        })
+
         setSocketNameSpace(nameSpace)
 
     }, [])
@@ -39,8 +44,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
         if (chats.length !== 0) {
             setMessages(chats)
         }
-    }, [])
-
+    }, [])    
 
     const handleSendMessage = (e) => {
         e.preventDefault()
@@ -59,6 +63,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
             }
 
         })
+        socketNameSpace.on
         setMessageInput('')
     }
 
