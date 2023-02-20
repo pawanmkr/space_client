@@ -71,7 +71,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
     const handleFileMessage = (e) => {
         e.preventDefault()
         socketNameSpace.emit('fileFromClient', attachment)
-        setAttachment({ file: null, name: '', type: '', size: '' })
+        setAttachment([])
         setCheckAt(false)
     }
 
@@ -88,14 +88,16 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
 
     const uploadAttachmentFile = (e) => {
         let files = e.target.files[0]
-        setAttachment({
-            name: files.name,
-            format: files.type,
-            size: files.size,
-            actualFile: files,
-            sender: username,
-            space: spaceId
-        })
+        console.log(files)
+        setAttachment(
+            {
+                name: files.name, 
+                size: files.size,
+                format: files.format, 
+                actualFile: files,
+                sender: username,
+                spaceId: spaceId
+            })
         handleAttachment()
         setCheckAt(true)
     }
@@ -123,8 +125,8 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
 
                     <div className="w-100 position-relative">
 {checkAt &&                        <div className="attachment_file_show d-flex justify-content-between align-items-center px-4">
-                            <p className="mb-0">{attachment.name}</p>
-                            <p className="mb-0">{attachment.size}</p>
+                            <p className="mb-0">{attachment[0].name}</p>
+                            <p className="mb-0">{attachment[0].size}</p>
                         </div>}
                         <input type="text" className="input-message" value={messageInput} placeholder="Type Message Here..." onChange={(e) => setMessageInput(e.target.value)} />
                     </div>
@@ -143,7 +145,7 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
                             </div>
                         </div>
 
-                        <button ref={sendBtn} id="sendBtn" type="submit" className="input-submit-btn" onClick={checkAt ?handleFileMessage :handleSendMessage}><i className="fa-solid fa-paper-plane"></i></button>
+                        <button ref={sendBtn} id="sendBtn" type="submit" className="input-submit-btn" onClick={checkAt ? handleFileMessage :handleSendMessage}><i className="fa-solid fa-paper-plane"></i></button>
                     </div>
 
                 </form>
