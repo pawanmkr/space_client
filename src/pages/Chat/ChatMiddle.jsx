@@ -91,9 +91,9 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
         console.log(files)
         setAttachment(
             {
-                name: files.name, 
-                size: files.size,
-                format: files.format, 
+                name: files?.name, 
+                size: files?.size,
+                format: files?.format, 
                 actualFile: files,
                 sender: username,
                 spaceId: spaceId
@@ -125,8 +125,8 @@ const ChatMiddle = ({ newSpace, handleFormSubmit, sendBtn, username, spaceId, ch
 
                     <div className="w-100 position-relative">
 {checkAt &&                        <div className="attachment_file_show d-flex justify-content-between align-items-center px-4">
-                            <p className="mb-0">{attachment[0].name}</p>
-                            <p className="mb-0">{attachment[0].size}</p>
+                            <p className="mb-0 attachment-file-name">{attachment?.name}</p>
+                            <p className="mb-0">{attachment?.size}</p>
                         </div>}
                         <input type="text" className="input-message" value={messageInput} placeholder="Type Message Here..." onChange={(e) => setMessageInput(e.target.value)} />
                     </div>
