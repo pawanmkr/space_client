@@ -19,6 +19,9 @@ function App() {
   const navigate = useNavigate()
   const sendBtn = useRef(null)
 
+  const server = "https://spaces-api.onrender.com/";
+  const localServer = "http://localhost:4000/";
+
 
   
   // create room - fetch post
@@ -29,8 +32,8 @@ function App() {
       name: space,
       username: username
     }
-
-    fetch(`https://spaces-api.onrender.com/namespace/create/${space}`, {
+    console.log(`${localServer}join/${space}`);
+    fetch(`${localServer}create/${space}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -57,7 +60,7 @@ function App() {
     }
 
     // switch back to localhost when in development 
-    fetch(`https://spaces-api.onrender.com/namespace/join/${space}`, {
+    fetch(`${localServer}join/${space}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
