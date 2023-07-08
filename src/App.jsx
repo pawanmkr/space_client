@@ -32,8 +32,8 @@ function App() {
       name: space,
       username: username
     }
-    console.log(`${localServer}join/${space}`);
-    fetch(`${localServer}create/${space}`, {
+    console.log(`${server}join/${space}`);
+    fetch(`${server}create/${space}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -60,7 +60,7 @@ function App() {
     }
 
     // switch back to localhost when in development 
-    fetch(`${localServer}join/${space}`, {
+    fetch(`${server}join/${space}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

@@ -33,7 +33,7 @@ const ChatMiddle = ({
   const localServer = "http://localhost:4000/";
 
   useEffect(() => {
-    const nameSpace = io(`${localServer}${newSpace}`, {
+    const nameSpace = io(`${server}${newSpace}`, {
       transports: ["websocket"],
       upgrade: false,
       rejectUnauthorized: false,
